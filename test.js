@@ -1,46 +1,31 @@
+console.log("Script loaded from GitHub repo");
 
-(function () {
-  console.log("Accessibility script started");
+(function(){
+  let tries=0,max=20;
 
-  let tries = 0;
-  const maxTries = 20;
-
-  const run = () => {
+  const run=()=>{
     tries++;
-    console.log("Scan attempt:", tries);
+    console.log("ARIA scan attempt:",tries);
 
-    const links = document.querySelectorAll(
-      'a[href^="mailto:"], a[href^="tel:"]'
-    );
+    const links=document.querySelectorAll('a[href^="mailto:"]');
+    console.log("Mailto links found:",links.length);
 
-    console.log("Links found:", links.length);
-
-    if (!links.length) {
-      if (tries < maxTries) {
-        setTimeout(run, 500);
-      } else {
-        console.warn("No mailto/tel links found after retries");
-      }
-      return;
+    if(!links.length){
+      if(tries<max)return setTimeout(run,500);
+      return console.warn("No mailto links detected");
     }
 
-    links.forEach((link, i) => {
-      const href = link.getAttribute("href");
-      let text = link.textContent.trim();
+    links.forEach((l,i)=>{
+      const h=l.getAttribute("href");
+      const email=h.replace("mailto:","").trim();
 
-      console.log(`Processing link ${i + 1}:`, href, text);
+      console.log("Processing mailto link",i+1,email);
 
-      if (href.startsWith("mailto:")) {
-        link.setAttribute("aria-label", "Email address: " + text);
-      } else if (href.startsWith("tel:")) {
-        text = text.replace(/^(Tel:|Phone:)\s*/i, "");
-        link.setAttribute("aria-label", "Phone number: " + text);
-      }
+      l.setAttribute("aria-label","Email: "+email);
     });
 
-    console.log("ARIA labels successfully applied");
+    console.log("ARIA labels applied to mailto links");
   };
 
   run();
 })();
-console.log("Script loaded from GitHub repo");
