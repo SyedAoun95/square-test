@@ -29,3 +29,5 @@ console.log("Script loaded from GitHub repo");
 
   run();
 })();
+
+   console.log("ARIA labels applied to mailto links");
