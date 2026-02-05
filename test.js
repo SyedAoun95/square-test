@@ -1,4 +1,4 @@
-console.log("Script loaded from GitHub repo");
+console.log("Script loaded from GitHub repoooooooooooo");
 
 (function(){
   let tries=0,max=20;
