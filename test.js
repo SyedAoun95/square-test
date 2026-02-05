@@ -1,4 +1,3 @@
-console.log("Script loaded from GitHub repo");
 
 (function () {
   console.log("Accessibility script started");
@@ -44,3 +43,4 @@ console.log("Script loaded from GitHub repo");
 
   run();
 })();
+console.log("Script loaded from GitHub repo");
